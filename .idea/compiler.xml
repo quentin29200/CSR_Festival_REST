@@ -24,8 +24,16 @@
         <processorPath useClasspath="true" />
         <module name="tp-synchro-rest-festival" />
       </profile>
+      <profile default="false" name="Annotation profile for CSR_Festival_REST" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="CSR_Festival_REST" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="CSR_Festival_REST" target="1.8" />
       <module name="tp-synchro-rest-festival" target="1.8" />
     </bytecodeTargetLevel>
   </component>

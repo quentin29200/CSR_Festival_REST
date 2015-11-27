@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CSR_Festival_REST.iml" filepath="$PROJECT_DIR$/CSR_Festival_REST.iml" />
       <module fileurl="file://$PROJECT_DIR$/tp-synchro-rest-festival.iml" filepath="$PROJECT_DIR$/tp-synchro-rest-festival.iml" />
       <module fileurl="file://$PROJECT_DIR$/tp-synchro-rest-festival.iml" filepath="$PROJECT_DIR$/tp-synchro-rest-festival.iml" />
     </modules>
