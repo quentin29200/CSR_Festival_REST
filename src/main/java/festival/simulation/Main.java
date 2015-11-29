@@ -5,8 +5,11 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Simulation simulation = new Simulation();
-		//simulation.addPeople(5);
-		//simulation.addBuses(2,2);
+		// Ajout de 5 bus de capacité 40 places
+		simulation.addBuses(1,1);
+
+		simulation.addPeople(2);
+
 	}
 
 }

@@ -1,41 +1,53 @@
 package festival.simulation;
 
-import festival.classes.AireDeConcert;
-import festival.classes.Bus;
-import festival.classes.SiteDepart;
+import festival.classes.*;
 
 import java.util.ArrayList;
 
 public class Simulation {
+    private ArrayList<Bus> buses_depart = new ArrayList<>();
+    private ArrayList<Bus> buses_arrivee = new ArrayList<>();
+    private SiteDepart depart;
+    private Billeterie billeterie;
+    private AireDeConcert sitefestival;
 
-
-	public Simulation() {
-        ArrayList<Bus> buses_depart = new ArrayList<>();
-        ArrayList<Bus> buses_arrivee = new ArrayList<>();
-        for (int i = 0; i <5; i++) {
-            System.out.println("Bus "+i+" créé");
-            Bus b = new Bus(i, 40);
-            buses_depart.add(b);
-        }
-
-        SiteDepart depart = new SiteDepart(buses_depart, 10000);
+    public Simulation() {
+        this.depart = new SiteDepart(buses_depart, 15000);
         System.out.println("Site de départ créé : Buses ajoutés au site de départ");
 
-        AireDeConcert sitefestival = new AireDeConcert(buses_arrivee, 1000);
-        System.out.println("Aire du concert créé");
+        this.billeterie = new Billeterie();
 
-        System.out.println("Lancement de la rotation des bus");
-        for(Bus b : buses_depart) {
-            b.initialiserTrajet(depart, sitefestival);
+        this.sitefestival = new AireDeConcert(buses_arrivee, 1000);
+        System.out.println("Aire du concert créé");
+    }
+
+	public void addPeople(int people) {
+        for (int i = 0; i <people; i++) {
+            Festivalier f = new Festivalier(i,"Festi"+i,"Festi"+i, this);
+            f.start();
+        }
+    }
+
+	public void addBuses(int buses, int seats) {
+        for (int i = 0; i <buses; i++) {
+            System.out.println("Bus "+i+" créé");
+            Bus b = new Bus(i, seats);
+            b.initialiserTrajet(this.depart, this.sitefestival);
+            this.buses_depart.add(b);
             b.start();
         }
     }
 
-	public void addPeople(int people) {
-        // TODO	
+    // Getter and Setter
+    public ArrayList<Bus> getBuses_depart() {
+        return buses_depart;
     }
 
-	public void addBuses(int buses, int seats) {
-	    // TODO
+    public SiteDepart getDepart() {
+        return depart;
+    }
+
+    public Billeterie getBilleterie() {
+        return billeterie;
     }
 }

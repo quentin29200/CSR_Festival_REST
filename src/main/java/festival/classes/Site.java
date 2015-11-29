@@ -26,5 +26,7 @@ public abstract class Site {
         this.buses.remove(bus);
     }
 
-
+    public ArrayList<Bus> getBuses() {
+        return buses;
+    }
 }
