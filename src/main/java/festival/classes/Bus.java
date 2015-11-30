@@ -29,19 +29,15 @@ public class Bus extends Thread {
         this.festivaliers = new ArrayList<>();
     }
 
-    synchronized public boolean estComplet() {
-        synchronized (this) {
-            return festivaliers.size() >= this.capa;
-        }
+    public boolean estComplet() {
+        return festivaliers.size() >= this.capa;
     }
 
 
-    synchronized public void ajoutFestivalier(Festivalier f) {
-        synchronized (this) {
-            System.out.println("Festivalier " + f.getIdF() + " monte dans le bus " + this.idB);
-            this.festivaliers.add(f);
-            f.setEtatF("C");
-        }
+    public void ajoutFestivalier(Festivalier f) {
+        System.out.println("Festivalier " + f.getIdF() + " monte dans le bus " + this.idB);
+        this.festivaliers.add(f);
+        f.setEtatF("C");
     }
 
         public void initialiserTrajet(SiteDepart depart, AireDeConcert arrivee) {
@@ -52,17 +48,25 @@ public class Bus extends Thread {
     // Faire arriver un bus sur un site
     public void arriver( Site site ) {
         this.current_site = site;
-        site.ajoutBus(this);
-        System.out.println("Bus "+this.idB+" arrive sur "+this.current_site.toString());
         // Si il s'agit de l'aire de concert
         if (site instanceof AireDeConcert) {
+            site.ajoutBus(this);
+            System.out.println("Bus "+this.idB+" arrive sur "+this.current_site.toString());
             System.out.println("Bus "+this.idB+" débarquement des passagers...");
             // On fait descendre tout le monde du bus (passage du festivalier à l'état D et on vide la liste des festivaliers du bus
             for(Festivalier f : this.festivaliers) {
                 f.setEtatF("D");
             }
+
             this.festivaliers.clear();
         }
+        if (site instanceof SiteDepart) {
+            ((SiteDepart)site).ajouterBus(this);
+            System.out.println("Bus "+this.idB+" arrive sur "+this.current_site.toString());
+            System.out.println("Bus "+this.idB+" embarquement des passagers...");
+        }
+
+
     }
 
     public void attendre() {

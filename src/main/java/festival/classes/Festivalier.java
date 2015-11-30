@@ -9,6 +9,9 @@ import java.util.ArrayList;
  */
 public class Festivalier extends Thread {
 
+    // INSTANCE de classe - nb festivalier dans la boucle du parcours des bus
+    private static int nbfestivalierbus = 0;
+
     // VARIABLE - Identifiant du festivalier
     private int idF = 0;
 
@@ -65,14 +68,21 @@ public class Festivalier extends Thread {
     }
 
     // Monter dans le bus
-    public boolean monterDansLeBus(Bus b)
+    public boolean monterDansLeBus()
     {
-        // Un seul festivalier monte a la fois dans le bus b
-        // Pour verifier le nombre de place
-        if (!b.estComplet()) {
-            b.ajoutFestivalier(this);
-            return true;
+            // Un seul festivalier monte a la fois dans le bus b
+            // Pour verifier le nombre de place
+            // Tant que le festivalier n'est pas monter dans le bus
+            while (this.etatF != "C") {
+               this.simulation.getDepart().monterDansBus(this);
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
         }
+
 
         return false;
     }
@@ -81,24 +91,7 @@ public class Festivalier extends Thread {
         // Si il reste des places, le festivalier achete un billet
         if (this.acheterBillet(this.simulation.getBilleterie())) {
             System.out.println("Festivalier "+this.idF+" a acheté son billet !");
-            ArrayList<Bus> busEnAttente =  this.simulation.getDepart().getBuses();
-            // Seul les festivaliers aillant un billet peuvent monter
-            if (this.etatF == "B") {
-
-                /** TODO WAIT SI PAS DE BUS, ET BUS DOIT NOTIFY FESTIVALIER QUAND IL ARRIVE */
-
-                // Tant que le festivalier n'est pas monter dans le bus
-                while (this.etatF != "C") {
-                    // on parcours tous les bus présent
-                    for (Bus bus : busEnAttente) {
-                        // Si le bus n'est pas complet, le festivalier monte dedans
-                        if (this.monterDansLeBus(bus)) {
-                            // Le festivalier est dedans, l'état passe à C, on sort de la boucle
-                            break;
-                        }
-                    }
-                }
-            }
+            this.simulation.getDepart().monterDansBus(this);
         }
 
     }
