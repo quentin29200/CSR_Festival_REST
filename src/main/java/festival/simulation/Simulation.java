@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Simulation {
     private ArrayList<Bus> buses_depart = new ArrayList<>();
     private ArrayList<Bus> buses_arrivee = new ArrayList<>();
+    private ArrayList<Festivalier> festivaliers = new ArrayList<>();
     private SiteDepart depart;
     private Billeterie billeterie;
     private AireDeConcert sitefestival;
@@ -21,9 +22,19 @@ public class Simulation {
         System.out.println("Aire du concert créé");
     }
 
-	public void addPeople(int people) {
+	public void addPeoples(int people) {
         for (int i = 0; i <people; i++) {
-            Festivalier f = new Festivalier(i,"Festi"+i,"Festi"+i, this);
+            Festivalier f = new Festivalier("Festi"+i,"Festi"+i, this);
+            festivaliers.add(f);
+            System.out.println("Festi"+i);
+            f.start();
+        }
+    }
+
+    public void addPeople(int people) {
+        for (int i = 0; i <people; i++) {
+            Festivalier f = new Festivalier("Festi"+i,"Festi"+i, this);
+            festivaliers.add(f);
             System.out.println("Festi"+i);
             f.start();
         }
@@ -50,5 +61,9 @@ public class Simulation {
 
     public Billeterie getBilleterie() {
         return billeterie;
+    }
+
+    public ArrayList<Festivalier> getFestivaliers() {
+        return festivaliers;
     }
 }

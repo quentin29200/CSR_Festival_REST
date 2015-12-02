@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Festivalier extends Thread {
     // VARIABLE - Identifiant du festivalier
-    private int idF = 0;
+    private static int idF = 0;
 
     // VARIABLE - Nom et prenom du festivalier
     private String nomF;
@@ -22,8 +22,8 @@ public class Festivalier extends Thread {
     private Simulation simulation;
 
     // Constructeur
-    public Festivalier(int idF, String nomF, String prenomF, Simulation s) {
-        this.idF = idF;
+    public Festivalier(String nomF, String prenomF, Simulation s) {
+        this.idF++;
         this.nomF = nomF;
         this.prenomF = prenomF;
         this.etatF = "A";
