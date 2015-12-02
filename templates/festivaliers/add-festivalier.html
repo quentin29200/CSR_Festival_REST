@@ -70,27 +70,20 @@
 
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-            <h1>Ajouter un festivalier</h1>
-            <form id="create-festivalier-form">
+                <h1>Combien de festivalier voulez-vous ajouter ?</h1>
+                <form id="generate-festivalier-form">
 
-                <div class="form-group">
-                    <label for="name">Nom du festivalier</label>
-                    <input type="text" class="form-control" id="name"
-                           placeholder="Nom">
-                </div>
-                <div class="form-group">
-                    <label for="prenom">Prénom du festivalier</label>
-                    <input type="text" class="form-control" id="prenom"
-                           placeholder="Prénom">
-                </div>
-                <button type="submit" class="btn btn-default"
-                        onclick="return false">
-                    Ajouter festivalier</button>
-                    
-            </form>
+                    <div class="form-group">
+                        <label for="count">Nombre de festivaliers ? (100 max)</label>
+                        <input type="number" class="form-control" id="count"
+                               placeholder="1 ? 2 ? 3 ?">
+                    </div>
+                    <button type="submit" class="btn btn-default" id="btn_count_field" onclick="return false;">
+                        Générer les champs</button>
+
+                </form>
             </div>
-        </div>
-        <!-- /.row -->
+            <!-- /.row -->
 
         <div class="row">
             <ul class="list-unstyled text-center" style="padding-top:90px;">
@@ -110,7 +103,10 @@
     <script src="../../static/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../../static/ js/bootstrap.min.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS code -->
+    <script src="../../static/js/app.js"></script>
 
 </body>
 

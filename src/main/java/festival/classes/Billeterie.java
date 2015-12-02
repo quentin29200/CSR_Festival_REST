@@ -17,13 +17,26 @@ public class Billeterie {
     }
 
     // Getters et setters
-    public int getNbBilletDispo() {
-        return nbBilletDispo;
-    }
-    public int retirerUnBilletDispo() {
+    public int getNbBilletDispo() { return nbBilletDispo; }
+
+    // Acheter un billet
+    public boolean acheterBillet(Festivalier f) {
         synchronized (this) {
-            System.out.println("Nombre de billets avant achat : " + nbBilletDispo);
-            return nbBilletDispo--;
+            // Si il reste des billets et si le festivalier n'a pas encore acheté de billet
+            if (this.nbBilletDispo > 0 && f.getEtatF().equals("A")) {
+
+                // Decrementer le nombre de billets dispo
+                System.out.println("Nombre de billets avant achat : " + nbBilletDispo);
+                this.nbBilletDispo--;
+
+                // Attribution d'un billet a un festivalier = Changer etat festivalier
+                f.setEtatF("B");
+
+                // Le festivalier a bien acheté son billet
+                return true;
+            }
+            return false;
         }
     }
+
 }
