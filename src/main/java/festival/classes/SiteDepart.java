@@ -16,39 +16,41 @@ public class SiteDepart extends Site {
         this.tempsAttente = tempsAttente;
     }
 
-    public void monterDansBus(Festivalier f) {
-        synchronized (this) {
-            // Seul les festivaliers aillant un billet peuvent monter
-            if (f.getEtatF() == "B") {
-                // Tant que le festivalier n'est pas dans un bus
-                while (f.getEtatF() != "C") {
-                    // Si il n'a pas réussi a monter dans un bus
-                    for (Bus bus : super.getBuses()) {
-                        // Si le bus n'est pas complet, le festivalier monte dedans
-                        if (!bus.estComplet() && f.getEtatF() == "B") {
-                            bus.ajoutFestivalier(f);
-                            // Le festivalier est dedans, l'état passe à C, on sort de la boucle
-                            break;
-                        }
+    /**
+     *
+     * @param f
+     *  Festivalier - Le festivalier qui monte dans le bus
+     */
+    public synchronized void monterDansBus(Festivalier f) {
+        // Seul les festivaliers aillant un billet peuvent monter
+        if (f.getEtatF().equals("B")) {
+            // Tant que le festivalier n'est pas dans un bus
+            while (!f.getEtatF().equals("C")) {
+                // Si il n'a pas reussi a monter dans un bus
+                for (Bus bus : super.getBuses()) {
+                    // Si le bus n'est pas complet, le festivalier monte dedans
+                    if (!bus.estComplet() && f.getEtatF().equals("B")) {
+                        bus.ajoutFestivalier(f);
+                        // Le festivalier est dedans, l'etat passe a C, on sort de la boucle
+                        break;
                     }
-                    if (f.getEtatF() != "C") {
-                        try {
-                            // Il attend d'être notifié par l'arrivée d'un bus
-                            this.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                }
+                // Si il a vÃ©rifiÃ© tous les bus et qu'ils sont tous pleins
+                if (f.getEtatF().equals("B")) {
+                    try {
+                        // Il attend d'etre notifie par l'arrivee d'un bus
+                        this.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
             }
         }
     }
 
-    public void ajouterBus(Bus b) {
-        synchronized (this) {
-            super.ajoutBus(b);
-            this.notifyAll();
-        }
+    public synchronized void ajouterBus(Bus b) {
+        super.ajoutBus(b);
+        this.notifyAll();
     }
 
 

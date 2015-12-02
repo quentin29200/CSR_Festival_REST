@@ -43,26 +43,9 @@ public class Festivalier extends Thread {
         return idF;
     }
 
-    // Acheter un billet
-    public boolean acheterBillet(Billeterie b) {
-        // Si il reste des billets et si le festivalier n'a pas encore acheté de billet
-        if (b.getNbBilletDispo() > 0 && this.getEtatF().equals("A"))
-        {
-            // Decrementer le nombre de billets dispo
-            b.retirerUnBilletDispo();
-
-            // Attribution d'un billet a un festivalier = Changer etat festivalier
-            this.setEtatF("B");
-
-            // Le festivalier a bien acheté son billet
-            return true;
-        }
-        return false;
-    }
-
     public void run() {
         // Si il reste des places, le festivalier achete un billet
-        if (this.acheterBillet(this.simulation.getBilleterie())) {
+        if (this.simulation.getBilleterie().acheterBillet(this)) {
             System.out.println("Festivalier "+this.idF+" a acheté son billet !");
             this.simulation.getDepart().monterDansBus(this);
         } else {
