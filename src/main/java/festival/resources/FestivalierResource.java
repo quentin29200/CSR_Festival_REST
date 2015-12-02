@@ -1,10 +1,10 @@
 package festival.resources;
 
-
-import festival.backend.Backend;
 import festival.classes.Festivalier;
 import festival.simulation.Simulation;
 import org.json.JSONArray;
+import org.restlet.data.MediaType;
+import org.restlet.representation.FileRepresentation;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
@@ -44,6 +44,11 @@ public class FestivalierResource extends ServerResource
                 .get("simulation");
     }
 
+    @Get("html")
+    public Representation getFestivalierHtml() {
+        return new FileRepresentation("templates/festivaliers/get-festivalier.html", MediaType.TEXT_HTML);
+    }
+
     /**
      * Returns the user matching the id given in the URI
      * 
@@ -51,15 +56,16 @@ public class FestivalierResource extends ServerResource
      * @throws JSONException
      */
     @Get("json")
-    public Representation getFestivaliers() throws Exception
+    public Representation getFestivalier() throws Exception
     {
         String festIdString = (String) getRequest().getAttributes().get("id");
         int festID = Integer.valueOf(festIdString);
         fest_ = simulation_.getFestivaliers().get(festID);
 
         JSONObject festObject = new JSONObject();
-        festObject.put("id", fest_.getName());
+        festObject.put("id", fest_.getIdF());
         festObject.put("etat", fest_.getEtatF());
+        festObject.put("url_stats",getReference().toString() + fest_.getIdF() + "/stats");
 
         JsonRepresentation result = new JsonRepresentation(festObject);
         result.setIndenting(true);
