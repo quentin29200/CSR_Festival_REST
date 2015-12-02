@@ -45,22 +45,19 @@ public class Festivalier extends Thread {
 
     // Acheter un billet
     public boolean acheterBillet(Billeterie b) {
-        // Un seul achat de billet en meme temps
-        synchronized (this) {
-            // Si il reste des billets et si le festivalier n'a pas encore acheté de billet
-            if (b.getNbBilletDispo() > 0 && this.getEtatF().equals("A"))
-            {
-                // Decrementer le nombre de billets dispo
-                b.retirerUnBilletDispo();
+        // Si il reste des billets et si le festivalier n'a pas encore acheté de billet
+        if (b.getNbBilletDispo() > 0 && this.getEtatF().equals("A"))
+        {
+            // Decrementer le nombre de billets dispo
+            b.retirerUnBilletDispo();
 
-                // Attribution d'un billet a un festivalier = Changer etat festivalier
-                this.setEtatF("B");
+            // Attribution d'un billet a un festivalier = Changer etat festivalier
+            this.setEtatF("B");
 
-                // Le festivalier a bien acheté son billet
-                return true;
-            }
-            return false;
+            // Le festivalier a bien acheté son billet
+            return true;
         }
+        return false;
     }
 
     public void run() {

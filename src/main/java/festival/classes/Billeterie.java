@@ -21,6 +21,9 @@ public class Billeterie {
         return nbBilletDispo;
     }
     public int retirerUnBilletDispo() {
-        return nbBilletDispo--;
+        synchronized (this) {
+            System.out.println("Nombre de billets avant achat : " + nbBilletDispo);
+            return nbBilletDispo--;
+        }
     }
 }
