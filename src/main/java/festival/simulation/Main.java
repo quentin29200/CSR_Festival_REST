@@ -6,9 +6,9 @@ public class Main {
 		
 		Simulation simulation = new Simulation();
 		// Ajout de 5 bus de capacité 40 places
-		simulation.addBuses(1,1);
+		simulation.addBuses(2,4);
 
-		simulation.addPeople(2);
+		simulation.addPeople(20);
 
 	}
 

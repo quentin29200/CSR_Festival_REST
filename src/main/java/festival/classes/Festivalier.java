@@ -8,10 +8,6 @@ import java.util.ArrayList;
  * Created by 13006798 on 25/11/15.
  */
 public class Festivalier extends Thread {
-
-    // INSTANCE de classe - nb festivalier dans la boucle du parcours des bus
-    private static int nbfestivalierbus = 0;
-
     // VARIABLE - Identifiant du festivalier
     private int idF = 0;
 
@@ -67,31 +63,13 @@ public class Festivalier extends Thread {
         }
     }
 
-    // Monter dans le bus
-    public boolean monterDansLeBus()
-    {
-            // Un seul festivalier monte a la fois dans le bus b
-            // Pour verifier le nombre de place
-            // Tant que le festivalier n'est pas monter dans le bus
-            while (this.etatF != "C") {
-               this.simulation.getDepart().monterDansBus(this);
-                try {
-                    this.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-        }
-
-
-        return false;
-    }
-
     public void run() {
         // Si il reste des places, le festivalier achete un billet
         if (this.acheterBillet(this.simulation.getBilleterie())) {
             System.out.println("Festivalier "+this.idF+" a acheté son billet !");
             this.simulation.getDepart().monterDansBus(this);
+        } else {
+            System.out.println("Accès refusé, plus de billet");
         }
 
     }

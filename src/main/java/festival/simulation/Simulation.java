@@ -24,6 +24,7 @@ public class Simulation {
 	public void addPeople(int people) {
         for (int i = 0; i <people; i++) {
             Festivalier f = new Festivalier(i,"Festi"+i,"Festi"+i, this);
+            System.out.println("Festi"+i);
             f.start();
         }
     }

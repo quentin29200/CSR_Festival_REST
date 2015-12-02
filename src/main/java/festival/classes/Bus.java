@@ -105,6 +105,15 @@ public class Bus extends Thread {
         }
     }
 
+    public String toString() {
+        String rslt = "Bus "+idB+"\n";
+        for(Festivalier f : this.festivaliers) {
+            rslt += "Festivalier "+f.getIdF()+"\n";
+        }
+        rslt  += "\n";
+        return rslt;
+    }
+
     public void run() {
 
         System.out.println("On lance un thread Bus !");
@@ -114,6 +123,7 @@ public class Bus extends Thread {
             this.arriver(this.depart);
             this.attendre();
             this.partir();
+            System.out.println(this.toString());
             this.arriver(this.arrivee);
             this.attendre();
             this.partir();

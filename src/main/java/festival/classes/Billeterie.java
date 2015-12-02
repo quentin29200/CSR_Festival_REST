@@ -6,7 +6,7 @@ package festival.classes;
 public class Billeterie {
 
     // CONSTANTE - Nombre de tickets max
-    private final static int nbBilletMax = 10;
+    private final static int nbBilletMax = 100;
 
     // VARIABLE - Nombre de billets dispo
     private int nbBilletDispo;

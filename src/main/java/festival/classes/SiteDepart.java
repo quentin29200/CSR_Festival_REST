@@ -10,18 +10,10 @@ public class SiteDepart extends Site {
     // VARIABLE - Temps d'attente pour descendre
     private int tempsAttente;
 
-    // VARIABLE - Liste de festivalier en attente de prendre un bus
-    private ArrayList<Festivalier> festivaliers;
-
-    // VARIABLE - Bus en arrivage
-    private boolean busEnArrivage;
-
     // Constructeur
     public SiteDepart(ArrayList<Bus> buses, int tempsAttente) {
         super(buses);
         this.tempsAttente = tempsAttente;
-        this.busEnArrivage = false;
-        this.festivaliers = new ArrayList<>();
     }
 
     public void monterDansBus(Festivalier f) {
@@ -63,13 +55,5 @@ public class SiteDepart extends Site {
     // Getter et Setters
     public int getTempsAttente() {
         return tempsAttente;
-    }
-
-    public boolean busEnArrivage() {
-        return busEnArrivage;
-    }
-
-    public void setBusEnArrivage(boolean busEnArrivage) {
-        this.busEnArrivage = busEnArrivage;
     }
 }
