@@ -8,7 +8,9 @@ import festival.simulation.Simulation;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.restlet.data.MediaType;
 import org.restlet.ext.json.JsonRepresentation;
+import org.restlet.representation.FileRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
@@ -38,12 +40,17 @@ public class BusesResource extends ServerResource {
                 .get("simulation");
     }
 
+    @Get("html")
+    public Representation getFestivalierHtml() {
+        return new FileRepresentation("templates/add-buses.html", MediaType.TEXT_HTML);
+    }
+
     @Post("json")
-    public void createFest(JsonRepresentation representation) throws Exception
+    public void createBuses(JsonRepresentation representation) throws Exception
     {
         JSONObject object = representation.getJsonObject();
 
-        simulation_.addBuses(object.length(), 50);
+        simulation_.addBuses(object.getInt("nbbus"), 50);
     }
 
 }
