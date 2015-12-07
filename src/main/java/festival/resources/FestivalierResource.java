@@ -46,7 +46,7 @@ public class FestivalierResource extends ServerResource
 
     @Get("html")
     public Representation getFestivalierHtml() {
-        return new FileRepresentation("templates/festivaliers/get-festivalier.html", MediaType.TEXT_HTML);
+        return new FileRepresentation("templates/add-festivalier.html", MediaType.TEXT_HTML);
     }
 
     /**
@@ -65,7 +65,7 @@ public class FestivalierResource extends ServerResource
         JSONObject festObject = new JSONObject();
         festObject.put("id", fest_.getIdF());
         festObject.put("etat", fest_.getEtatF());
-        festObject.put("url_stats",getReference().toString() + fest_.getIdF() + "/stats");
+        // festObject.put("url_stats",getReference().toString() + fest_.getIdF() + "/stats");
 
         JsonRepresentation result = new JsonRepresentation(festObject);
         result.setIndenting(true);
@@ -76,7 +76,7 @@ public class FestivalierResource extends ServerResource
     public void createFest(JsonRepresentation representation) throws Exception
     {
         JSONObject object = representation.getJsonObject();
-
+        System.out.println("createFest called in POST");
         simulation_.addPeople(object.getInt("length"));
     }
 

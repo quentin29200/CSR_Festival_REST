@@ -35,7 +35,7 @@ public class FestivaliersResource extends ServerResource {
 
     @Get("html")
     public Representation getFestivaliersHtml() {
-        return new FileRepresentation("templates/festivaliers/list-festivaliers.html", MediaType.TEXT_HTML);
+        return new FileRepresentation("templates/list-festivaliers.html", MediaType.TEXT_HTML);
     }
 
     @Get("json")

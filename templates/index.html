@@ -12,7 +12,7 @@
     <title>My Festival Simulation</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <style>
@@ -49,15 +49,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="./festivaliers/index.html">Festivaliers</a>
-                    </li>
-                    <li>
-                        <a href="./add-buses.html">Bus</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/gigouni/CSR_Festival_REST" target="_blank">Lien vers le dépôt</a>
-                    </li>
+                    <li><a href="/people/">Festivaliers</a></li>
+                    <li><a href="/buses">Bus</a></li>
+                    <li><a href="https://github.com/gigouni/CSR_Festival_REST" target="_blank">Lien vers le dépôt</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -78,8 +72,8 @@
 
         <div class="row">
             <ul class="list-unstyled text-center" style="padding-top:90px;">
-                <li><span><a href="./festivaliers/index.html" title="">Gestion des festivaliers</a></span></li>
-                <li><span><a href="./add-buses.html" title="">Ajouter des buses</a></span></li>
+                <li><span><a href="/people/">Gestion des festivaliers</a></span></li>
+                <li><span><a href="/buses">Ajouter des buses</a></span></li>
             </ul>
         </div>
         <!-- /.row -->
@@ -88,10 +82,13 @@
     <!-- /.container -->
 
     <!-- jQuery Version 1.11.1 -->
-    <script src="../static/js/jquery.js"></script>
+    <script src="static/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../static/ js/bootstrap.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS code -->
+    <script src="static/js/app.js"></script>
 
 </body>
 
