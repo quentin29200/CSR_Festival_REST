@@ -13,7 +13,7 @@ $(document).ready(function() {
      */
     $("#create-user-form button").click( function() {
         var nb_users = new Object();
-        nb_users["length"] = $("#count-add-festiv").val();
+        nb_users["length"] = parseInt($("#count-add-festiv").val());
 
         console.log("Nb nouveaux festivaliers a ajouter : " + JSON.stringify(nb_users));
 
@@ -54,7 +54,7 @@ $(document).ready(function() {
             data: JSON.stringify(nb_buses),
             success: function(data){
                 console.log("SUCCESS. YOU ADD FESTIVALIERS. YOUR PRESENT : "  + data);
-                /* window.location = "/"; */
+                window.location.href = "http://127.0.0.1:5000/";
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log("Ajax error with add users");
