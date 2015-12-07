@@ -58,10 +58,11 @@ public class FestivalierResource extends ServerResource
     @Get("json")
     public Representation getFestivalier() throws Exception
     {
-        String festIdString = (String) getRequest().getAttributes().get("people-id");
+        System.out.println("Choux fleur");
+        String festIdString = (String) getRequest().getAttributes().get("peopleId");
         int festID = Integer.valueOf(festIdString);
         fest_ = simulation_.getFestivaliers().get(festID);
-
+        System.out.println("Crotte");
         JSONObject festObject = new JSONObject();
         festObject.put("id", fest_.getIdF());
         festObject.put("nom", fest_.getNomF());

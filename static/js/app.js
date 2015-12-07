@@ -93,9 +93,9 @@ $(document).ready(function() {
 
                                 console.log("TA MERE : " + JSON.stringify(data));
                                 var detail_id = data.id;
-                                var detail_nomF = data.nomF;
-                                var detail_prenomF = data.prenomF;
-                                var detail_etat = data.etatF;
+                                var detail_nomF = data.nom;
+                                var detail_prenomF = data.prenom;
+                                var detail_etat = data.etat;
 
                                 $("#detail-user-id").val(detail_id);
                                 $("#detail-user-nomF").val(detail_nomF);
