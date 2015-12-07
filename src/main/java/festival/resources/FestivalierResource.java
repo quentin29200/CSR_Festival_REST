@@ -77,7 +77,7 @@ public class FestivalierResource extends ServerResource
     {
         JSONObject object = representation.getJsonObject();
 
-        simulation_.addPeople(object.length());
+        simulation_.addPeople(object.getInt("length"));
     }
 
 }
