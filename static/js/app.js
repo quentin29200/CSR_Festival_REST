@@ -77,30 +77,23 @@ $(document).ready(function() {
 
                     users_table.append(
                     '<tr>' +
-                        '<th><a id="detail-user-' + id +'" href="' + url + '">' + id + '</a></th>' +
+                        '<th><a id="detail_user_' + id +'" href="' + url + '">' + id + '</a></th>' +
                         '<td>' + etatF + '</td>' +
                     '</tr>'
                     );
 
-                    /* Detail implementation */
-                    $('a#detail-user-' + id).click(function() {
+                    $('a#detail_user_' + id).click(function() {
+                        console.log("TA MERE LA PUTE");
                         $.ajax({
                             type: "get",
                             url: "/people/" + id,
                             dataType: "json",
                             contentType : "application/json",
                             success: function(data){
-
-                                console.log("TA MERE : " + JSON.stringify(data));
-                                var detail_id = data.id;
-                                var detail_nomF = data.nom;
-                                var detail_prenomF = data.prenom;
-                                var detail_etat = data.etat;
-
-                                $("#detail-user-id").val(detail_id);
-                                $("#detail-user-nomF").val(detail_nomF);
-                                $("#detail-user-prenomF").val(detail_prenomF);
-                                $("#detail-user-etatF").val(detail_etat);
+                                $("#detail_user_id").append(data.id);
+                                $("#detail_user_nomF").append(data.nom);
+                                $("#detail_user_prenomF").append(data.prenom);
+                                $("#detail_user_etatF").append(data.etat);
                             }
                         });
                     });
