@@ -32,7 +32,7 @@ public class Festivalier extends Thread {
 
     private static synchronized int nextID()
     {
-        return ++nbfest;
+        return nbfest++;
     }
 
     // Getters et setters
