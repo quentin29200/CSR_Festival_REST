@@ -82,6 +82,7 @@ $(document).ready(function() {
                     '</tr>'
                     );
 
+                    /* Detail implementation */
                     $('a#detail-user-' + id).click(function() {
                         $.ajax({
                             type: "get",
