@@ -2,6 +2,7 @@ package festival.classes;
 
 import festival.simulation.Simulation;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,9 @@ import java.util.ArrayList;
  */
 public class Festivalier extends Thread {
     // VARIABLE - Identifiant du festivalier
-    private static int idF = 0;
+    private static int nbfest = 0;
+
+    private int idF;
 
     // VARIABLE - Nom et prenom du festivalier
     private String nomF;
@@ -23,11 +26,16 @@ public class Festivalier extends Thread {
 
     // Constructeur
     public Festivalier(String nomF, String prenomF, Simulation s) {
-        idF++;
+        this.idF = nextID();
         this.nomF = nomF;
         this.prenomF = prenomF;
         this.etatF = "A";
         this.simulation = s;
+    }
+
+    private static synchronized int nextID()
+    {
+        return ++nbfest;
     }
 
     // Getters et setters
