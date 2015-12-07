@@ -97,10 +97,10 @@ $(document).ready(function() {
                                 var detail_prenomF = data.prenomF;
                                 var detail_etat = data.etatF;
 
-                                $("#detail-user-id").value = detail_id;
-                                $("#detail-user-nomF").value = detail_nomF;
-                                $("#detail-user-prenomF").value = detail_prenomF;
-                                $("#detail-user-etatF").value = detail_etat;
+                                $("#detail-user-id").val(detail_id);
+                                $("#detail-user-nomF").val(detail_nomF);
+                                $("#detail-user-prenomF").val(detail_prenomF);
+                                $("#detail-user-etatF").val(detail_etat);
                             }
                         });
                     });
