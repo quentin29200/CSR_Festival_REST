@@ -2,41 +2,69 @@
  * CSR_Festival_REST
  * Fichier implémenté dans le cadre du cours de CSR et du TP REST en Java.
  *
- * Ce fichier rajoute des fonctionnalités à l'application comme la génération de
- * champs d'ajout de festivaliers par exemple.
- *
+ * @authors : Nicolas GIGOU & Quentin LAGADEC
  */
 
-// Clic sur le bouton de génération
-$( "#btn_count_field" ).click(function() {
+$(document).ready(function() {
 
-    // Récuperation valeur donnée par l'utilisateur
-    var value_cpt = $("#count").val();
+    /**
+     * Création d'un nombre de festivaliers donné par l'utilisateur
+     * via le formulaire de la page "Ajouter des festivaliers"
+     */
+    $("#create-user-form button").click( function() {
+        var nb_users = new Object();
 
-    try {
-        // Vérification si la valeur est un chiffre
-        if( $.isNumeric(value_cpt) || value_cpt < 100 ) {
-            console.log("La valeur est un entier. What a good boy !");
-            // Remontre la div contenant le formulaire d'ajout de festivalier
-            $(".div_form").removeClass("hidden");
-            console.log("D");
+        console.log("Nb nouveaux festivaliers demandés : " + nb_users);
 
-            // Change le titre du formulaire en fonction du nombre de festivaliers que l'on veut ajouter
-            var $titleForm = $("#title_form_count");
-            ( value_cpt > 1 ) ? $titleForm.append("Festivaliers ajoutés") : $titleForm.append("Festivalier ajouté");
-
-            // les champs du formualaire
-            var $fieldsForm = $("#create-festivalier-form");
-
-            // Clone le formulaire autant de fois que de value_cpt
-            for (i = 0; i < value_cpt; i++) {
-                // On clone
-                $fieldsForm.clone().append($fieldsForm);
+        $.ajax({
+            type: "post",
+            url: "/people",
+            dataType: "json",
+            contentType : "application/json",
+            data: JSON.stringify(nb_users),
+            success: function(data){
+                console.log(data);
+                window.location = "/";
             }
-        }
-    } catch (err) {
-        console.log("La valeur n'est pas un entier. Réessayez.");
-        console.log("Erreur relevée : " + err.message);
-    }
+        });
+    })
+
+    /**
+     * Liste les festivaliers
+     */
+    $('#list-users').ready( function() {
+        var users_table = $('#users-table tbody');
+
+        $.ajax({
+            type: "get",
+            url: "/people/",
+            dataType: "json",
+            contentType : "application/json",
+            success: function(data){
+                console.log(data);
+
+                $.each(data, function (item) {
+                    var id = data[item].id;
+                    var nomF = data[item].nomF;
+                    var prenomF = data[item].prenomF;
+
+                    users_table.append(
+                    '<tr>' +
+                        '<th>' + id + '</th>' +
+                        '<td>' + nomF + '</td>' +
+                        '<td>' + prenomF + '</td>' +
+                    '</tr>'
+                    );
+
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Ajax error with list users");
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    })
 
 });
