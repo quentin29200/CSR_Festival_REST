@@ -23,7 +23,7 @@ public class Festivalier extends Thread {
 
     // Constructeur
     public Festivalier(String nomF, String prenomF, Simulation s) {
-        this.idF++;
+        idF++;
         this.nomF = nomF;
         this.prenomF = prenomF;
         this.etatF = "A";

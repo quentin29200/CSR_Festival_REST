@@ -28,6 +28,7 @@ public class FestApp extends Application{
 
         Router router = new Router(getContext());
         router.attach("/", RootResource.class);
+        router.attach("/static", directory);
         router.attach("/people", FestivalierResource.class);
         router.attach("/people/", FestivaliersResource.class);
         router.attach("/buses", BusesResource.class);

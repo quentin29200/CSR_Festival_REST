@@ -17,7 +17,7 @@ import org.restlet.resource.Directory;
  */
 public final class Main
 {
-        //VVQS
+
     /** Hide constructor. */
     private Main()
     {
