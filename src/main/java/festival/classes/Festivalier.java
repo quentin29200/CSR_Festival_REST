@@ -5,9 +5,6 @@ import festival.simulation.Simulation;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-/**
- * Created by 13006798 on 25/11/15.
- */
 public class Festivalier extends Thread {
     // VARIABLE - Identifiant du festivalier
     private static int nbfest = 0;
@@ -50,6 +47,9 @@ public class Festivalier extends Thread {
     public int getIdF() {
         return idF;
     }
+
+    public String getNomF() { return nomF; }
+    public String getPrenomF() { return prenomF; }
 
     public void run() {
         // Si il reste des places, le festivalier achete un billet

@@ -58,16 +58,21 @@ public class FestivalierResource extends ServerResource
     @Get("json")
     public Representation getFestivalier() throws Exception
     {
-        String festIdString = (String) getRequest().getAttributes().get("id");
+        String festIdString = (String) getRequest().getAttributes().get("people-id");
         int festID = Integer.valueOf(festIdString);
         fest_ = simulation_.getFestivaliers().get(festID);
 
         JSONObject festObject = new JSONObject();
         festObject.put("id", fest_.getIdF());
+        festObject.put("nom", fest_.getNomF());
+        festObject.put("prenom", fest_.getPrenomF());
         festObject.put("etat", fest_.getEtatF());
-        // festObject.put("url_stats",getReference().toString() + fest_.getIdF() + "/stats");
 
         JsonRepresentation result = new JsonRepresentation(festObject);
+
+        System.out.println("festObject content : " + festObject);
+        System.out.println("result content : " + result);
+
         result.setIndenting(true);
         return result;
     }
@@ -76,7 +81,6 @@ public class FestivalierResource extends ServerResource
     public void createFest(JsonRepresentation representation) throws Exception
     {
         JSONObject object = representation.getJsonObject();
-        System.out.println("createFest called in POST");
         simulation_.addPeople(object.getInt("length"));
     }
 

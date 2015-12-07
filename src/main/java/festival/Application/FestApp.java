@@ -33,7 +33,6 @@ public class FestApp extends Application{
         router.attach("/people/", FestivaliersResource.class);
         router.attach("/buses", BusesResource.class);
         router.attach("/people/{people-id}", FestivalierResource.class);
-        router.attach("/people/{people-id}/stats", FestivalierResource.class);
         return router;
     }
 }

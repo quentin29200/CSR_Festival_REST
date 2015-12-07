@@ -8,14 +8,12 @@
 $(document).ready(function() {
 
     /**
-     * Création d'un nombre de festivaliers donné par l'utilisateur
+     * Ajout de N festivaliers
      * via le formulaire de la page "Ajouter des festivaliers"
      */
     $("#create-user-form button").click( function() {
         var nb_users = new Object();
         nb_users["length"] = parseInt($("#count-add-festiv").val());
-
-        console.log("Nb nouveaux festivaliers a ajouter : " + JSON.stringify(nb_users));
 
         $.ajax({
             type: "post",
@@ -24,14 +22,7 @@ $(document).ready(function() {
             contentType : "application/json",
             data: JSON.stringify(nb_users),
             success: function(data){
-                console.log("SUCCESS. YOU ADD FESTIVALIERS. YOUR PRESENT : "  + data);
-                window.location = "/";
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log("Ajax error with add users");
-                console.log(jqXHR);
-                console.log(textStatus);
-                console.log(errorThrown);
+                alert("Festivaliers créés.");
             }
         });
     })
@@ -44,8 +35,6 @@ $(document).ready(function() {
         var nb_buses = new Object();
         nb_buses["nbbus"] = $("#count-add-buses").val();
 
-        console.log("Nb nouveaux bus a ajouter : " + JSON.stringify(nb_buses));
-
         $.ajax({
             type: "post",
             url: "/buses",
@@ -54,21 +43,24 @@ $(document).ready(function() {
             data: JSON.stringify(nb_buses),
             success: function(data){
                 console.log("SUCCESS. YOU ADD FESTIVALIERS. YOUR PRESENT : "  + data);
-                window.location.href = "http://127.0.0.1:5000/";
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log("Ajax error with add users");
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(errorThrown);
-            }
+            },
+             then: function(data){
+                 console.log("SUCCESS. YOU ADD FESTIVALIERS. YOUR PRESENT : "  + data);
+             },
         });
     })
 
     /**
      * Liste les festivaliers
      */
-    $('#btn_generate_list').click( function() {
+    $('#list-festivaliers-tab').ready( function() {
+
         var users_table = $('#users-table tbody');
 
         $.ajax({
@@ -77,7 +69,6 @@ $(document).ready(function() {
             dataType: "json",
             contentType : "application/json",
             success: function(data){
-                console.log("LIST-USER LOG DATA : " + data);
 
                 $.each(data, function (item) {
                     var id = data[item].id;
@@ -86,10 +77,32 @@ $(document).ready(function() {
 
                     users_table.append(
                     '<tr>' +
-                        '<th><a href="' + url + '">' + id + '</a></th>' +
+                        '<th><a id="detail-user-' + id +'" href="' + url + '">' + id + '</a></th>' +
                         '<td>' + etatF + '</td>' +
                     '</tr>'
                     );
+
+                    $('a#detail-user-' + id).click(function() {
+                        $.ajax({
+                            type: "get",
+                            url: "/people/" + id,
+                            dataType: "json",
+                            contentType : "application/json",
+                            success: function(data){
+
+                                console.log("TA MERE : " + JSON.stringify(data));
+                                var detail_id = data.id;
+                                var detail_nomF = data.nomF;
+                                var detail_prenomF = data.prenomF;
+                                var detail_etat = data.etatF;
+
+                                $("#detail-user-id").value = detail_id;
+                                $("#detail-user-nomF").value = detail_nomF;
+                                $("#detail-user-prenomF").value = detail_prenomF;
+                                $("#detail-user-etatF").value = detail_etat;
+                            }
+                        });
+                    });
 
                 });
             },

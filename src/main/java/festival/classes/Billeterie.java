@@ -1,12 +1,9 @@
 package festival.classes;
 
-/**
- * Created by 13006798 on 25/11/15.
- */
 public class Billeterie {
 
     // CONSTANTE - Nombre de tickets max
-    private final static int nbBilletMax = 100;
+    private final static int nbBilletMax = 5000;
 
     // VARIABLE - Nombre de billets dispo
     private int nbBilletDispo;

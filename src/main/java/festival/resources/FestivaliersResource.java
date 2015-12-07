@@ -15,9 +15,6 @@ import org.restlet.resource.ServerResource;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by Quentin on 02/12/2015.
- */
 public class FestivaliersResource extends ServerResource {
 
     /** Backend. */
@@ -48,9 +45,9 @@ public class FestivaliersResource extends ServerResource {
         {
             JSONObject current = new JSONObject();
             current.put("id", festivalier.getIdF());
+            current.put("etatF", festivalier.getEtatF());
             current.put("url", getReference().toString() +  festivalier.getIdF());
             jsonUsers.add(current);
-
         }
         JSONArray jsonArray = new JSONArray(jsonUsers);
         JsonRepresentation result = new JsonRepresentation(jsonArray);
