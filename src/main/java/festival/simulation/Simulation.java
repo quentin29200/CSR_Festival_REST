@@ -3,7 +3,15 @@ package festival.simulation;
 import festival.classes.*;
 
 import java.util.ArrayList;
-
+/**
+ * <b>Classe Simulation</b>
+ * <p>
+ * Créé un site de départ, une billeterie, une aire de concert et permet d'ajouter
+ * des festivaliers et des bus à la simulation
+ * </p>
+ *
+ * @version 1.0
+ */
 public class Simulation {
     private ArrayList<Bus> buses_depart = new ArrayList<>();
     private ArrayList<Festivalier> festivaliers = new ArrayList<>();
@@ -11,6 +19,11 @@ public class Simulation {
     private Billeterie billeterie;
     private AireDeConcert sitefestival;
 
+    /**
+     * Constructeur de la simulation
+     *
+     *  Simulation
+     */
     public Simulation() {
         this.depart = new SiteDepart(buses_depart, 15000);
         System.out.println("Site de départ créé : Buses ajoutés au site de départ");
@@ -21,6 +34,11 @@ public class Simulation {
         System.out.println("Aire du concert créé");
     }
 
+    /**
+     * Méthode addpeoples
+     * Créé n festivaliers et les lance
+     * @param people
+     */
 	public void addPeoples(int people) {
         for (int i = 0; i <people; i++) {
             Festivalier f = new Festivalier("Festi","Festi", this);
@@ -30,6 +48,12 @@ public class Simulation {
         }
     }
 
+    /**
+     * Méthode addBuses
+     * Créé n bus et les lance
+     * @param buses
+     * @param seats
+     */
 	public void addBuses(int buses, int seats) {
         for (int i = 0; i <buses; i++) {
             Bus b = new Bus(seats);
@@ -39,19 +63,31 @@ public class Simulation {
         }
     }
 
-    // Getter and Setter
-    public ArrayList<Bus> getBuses_depart() {
-        return buses_depart;
-    }
 
+    // Getter and Setter
+    /**
+     * Getter SiteDepart
+     * @return SiteDepart
+     *      retourne le site de départ
+     */
     public SiteDepart getDepart() {
         return depart;
     }
 
+    /**
+     * Getter Billeterie
+     * @return Billeterie
+     *      retourne la billeterie
+     */
     public Billeterie getBilleterie() {
         return billeterie;
     }
 
+    /**
+     * Getter Festivalier
+     * @return Festivalier
+     *      retourne la liste des festivaliers
+     */
     public ArrayList<Festivalier> getFestivaliers() {
         return festivaliers;
     }

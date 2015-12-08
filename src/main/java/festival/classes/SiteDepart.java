@@ -3,7 +3,13 @@ package festival.classes;
 import java.util.ArrayList;
 
 /**
- * Created by 13006798 on 27/11/15.
+ * <b>Classe SiteDépart</b>
+ * <p>
+ *     Le site de départ dispose d'une collection de bus présent et
+ *     d'un temps d'attente
+ * </p>
+ *
+ * @version 1.0
  */
 public class SiteDepart extends Site {
     // VARIABLE - Ensemble des bus présent sur le site courant
@@ -12,13 +18,27 @@ public class SiteDepart extends Site {
     // VARIABLE - Temps d'attente pour descendre
     private int tempsAttente;
 
-    // Constructeur
+    /**
+     * Constructeur de SiteDépart
+     * Initialise la liste des bus présent sur le site et
+     * le temps d'attente d'un bus
+     * @param buses
+     * @param tempsAttente
+     */
     public SiteDepart(ArrayList<Bus> buses, int tempsAttente) {
         this.buses = buses;
         this.tempsAttente = tempsAttente;
     }
 
     /**
+     * Méthode MonterDansBus
+     *
+     * Vérifie l'état du festivalier
+     * Si festivalier dans l'état B
+     * Alors tant qu'il n'est pas dans l'état C il tente de monter dans un bus (parcours des bus présent)
+     * Si pas de bus ou bus tout complet, attente d'être notifié par l'arrivée d'un bus
+     * Si le festivalier rentre dans le bus, il est ajouté dans la liste des festivalier du bus
+     * et son état passe à C
      *
      * @param f
      *  Festivalier - Le festivalier qui monte dans le bus
@@ -50,20 +70,41 @@ public class SiteDepart extends Site {
         }
     }
 
-    // Getter et Setters
+    /**
+     * Getter TempsDescente
+     * @return int
+     *      retourne le temps d'attente
+     */
     public int getTempsAttente() {
         return tempsAttente;
     }
 
+
+    /**
+     * Méthode ajoutBus
+     * Ajoute un bus à la collection des bus présent
+     * Notifie tous les festivaliers en attente de l'arrivée d'un bus
+     * @param bus
+     */
     synchronized public void ajoutBus(Bus bus) {
         this.buses.add(bus);
         this.notifyAll();
     }
 
+    /**
+     * Méthode retraitBus
+     * Retire le bus de la collection des bus courant
+     * @param bus
+     */
     synchronized public void retraitBus(Bus bus) {
         this.buses.remove(bus);
     }
 
+    /**
+     * Méthode GetBuses
+     * Retourne la liste des bus présent sur le site de départ
+     * @return ArrayList
+     */
     public ArrayList<Bus> getBuses() {
         return this.buses;
     }

@@ -4,7 +4,18 @@ import festival.simulation.Simulation;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-
+/**
+ * <b>Classe Festivalier</b>
+ * <p>
+ * Simule le comportement d'un festivalier
+ *  Le festivalier est créé (A)
+ *  Le festivalier a acheté son billet (B)
+ *  Le festivalier est dans le bus (C)
+ *  Le festivalier est arrivé (D) *
+ * </p>
+ *
+ * @version 1.0
+ */
 public class Festivalier extends Thread {
     // VARIABLE - Identifiant du festivalier
     private static int nbfest = 0;
@@ -21,7 +32,13 @@ public class Festivalier extends Thread {
     // VARIABLE - Monde dans lequel est le festivaler
     private Simulation simulation;
 
-    // Constructeur
+    /**
+     * Constructeur du Festivalier
+     * Attribue un ID, un nom, un prénom et une simulation
+     * @param nomF
+     * @param prenomF
+     * @param s
+     */
     public Festivalier(String nomF, String prenomF, Simulation s) {
         this.idF = nextID();
         this.nomF = nomF+idF;
@@ -30,27 +47,59 @@ public class Festivalier extends Thread {
         this.simulation = s;
     }
 
-    private static synchronized int nextID()
-    {
+    /**
+     * Méthode nextID
+     * Génère un identifiant unique
+     * @return int
+     *      retourne l'id généré
+     */
+    private static synchronized int nextID() {
         return nbfest++;
     }
 
-    // Getters et setters
+    /**
+     * Méthode getEtat F
+     * Retourne l'état d'un festivalier
+     * @return String
+     */
     public String getEtatF() {
         return etatF;
     }
 
+    /**
+     * Méthode setEtatF
+     * Attribue un état à un festivalier (A, B, C ou D)
+     * @param etatF
+     */
     public void setEtatF(String etatF) {
         this.etatF = etatF;
     }
 
+    /**
+     * Méthode getIdF
+     * Retourne l'identifiant du festivalier
+     * @return int
+     */
     public int getIdF() {
         return idF;
     }
 
+    /**
+     * Méthode getNomF
+     * @return String
+     */
     public String getNomF() { return nomF; }
+
+    /**
+     * Méthode getPrenomF
+     * @return String
+     */
     public String getPrenomF() { return prenomF; }
 
+    /**
+     * Méthode run
+     * Lance l'execution d'un festivalier Achat Billet - Monter dans le bus
+     */
     public void run() {
         // Si il reste des places, le festivalier achete un billet
         if (this.simulation.getBilleterie().acheterBillet(this)) {

@@ -40,10 +40,25 @@ public class BusesResource extends ServerResource {
                 .get("simulation");
     }
 
+    /**
+     * Méthode getBusesHtml
+     * Affiche la template des buses
+     * @return Representation
+     *      Fichier HTML
+     */
     @Get("html")
-    public Representation getFestivalierHtml() {
+    public Representation getBusesHtml() {
         return new FileRepresentation("templates/add-buses.html", MediaType.TEXT_HTML);
     }
+
+    
+    /**
+     * Méthode CreateBuses
+     * Récupère un JSON pour connaître le nombre de bus à ajouter
+     * Puis fait appel à la fonction d'ajout de la simulation
+     * @param representation
+     * @throws Exception
+     */
 
     @Post("json")
     public void createBuses(JsonRepresentation representation) throws Exception

@@ -4,7 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 13006798 on 25/11/15.
+ * <b>Classe Bus - THREAD</b>
+ * <p>
+ * Simule le comportement d'un bus
+ *  Le bus arrive sur un site
+ *  le bus attend
+ *  le bus repart du site
+ * </p>
+ *
+ * @version 1.0
  */
 public class Bus extends Thread {
 
@@ -23,39 +31,81 @@ public class Bus extends Thread {
     private Site depart;
     private Site arrivee;
 
-    // Constructeur
+    /**
+     *  Constructeur du Bus
+     *  Attribue un ID, une capacité et une liste de festivalier à bord
+     *  @param capa
+     *      capacité du bus
+     */
     public Bus(int capa) {
         this.idB = nextID();
         this.capa = capa;
         this.festivaliers = new ArrayList<>();
     }
 
+    /**
+     * Méthode nextID
+     * Génère un identifiant unique
+     * @return int
+     *      retourne l'id généré
+     */
     private static synchronized int nextID()
     {
         return nbbus++;
     }
 
+    /**
+     * Getter IdB
+     *
+     * @return int
+     *      retourne l'identifiant du bus
+     */
     public int getIdB() {
         return idB;
     }
 
+    /**
+     * Methode estComplet
+     * Indique si le bus est complet ou non
+     * @return boolean
+     *      retourne vrai si complet, faux sinon
+     */
     public boolean estComplet() {
         return festivaliers.size() >= this.capa;
     }
 
-
+    /**
+     * Methode ajoutFestivalier
+     * Ajoute un festivalier dans la collection de festivalier du bus
+     * @param f
+     */
     public void ajoutFestivalier(Festivalier f) {
         System.out.println("Festivalier " + f.getIdF() + " monte dans le bus " + this.idB);
         this.festivaliers.add(f);
         f.setEtatF("C");
     }
 
-        public void initialiserTrajet(SiteDepart depart, AireDeConcert arrivee) {
+    /**
+     * Methode initialiserTrajet
+     * Renseigne le trajet du bus en lui indiquant le site de départ et l'aire de concert d'arrivée
+     * @param depart
+     * @param arrivee
+     */
+    public void initialiserTrajet(SiteDepart depart, AireDeConcert arrivee) {
         this.depart = depart;
         this.arrivee = arrivee;
     }
 
-    // Faire arriver un bus sur un site
+    /**
+     * Methode arriver
+     * Plusieurs cas possible
+     *      Le bus arrive sur l'aire de concert :
+     *          - Passage à l'état D de l'ensemble des festivaliers du bus
+     *          - Vider la collection des festivaliers du bus
+     *      Le bus arrive sur le site de départ ;
+     *          - Ajoute le bus à la collection de bus présent sur le site de départ
+     * @param site
+     */
     public void arriver( Site site ) {
         this.current_site = site;
         // Si il s'agit de l'aire de concert
@@ -79,6 +129,10 @@ public class Bus extends Thread {
 
     }
 
+    /**
+     * Methode attendre
+     * Wait le bus (thread) du temps d'attente du site courant
+     */
     public void attendre() {
         synchronized (this) {
             if (this.current_site instanceof SiteDepart) {
@@ -101,7 +155,14 @@ public class Bus extends Thread {
         }
     }
 
-    // Le bus part du site courant
+    /**
+     * Methode partir
+     * Si le bus est sur un site de départ,
+     * retire le bus de la collection des bus du site
+     *
+     * Lance le trajet d'une durée de 5secondes
+     *
+     */
     private void partir() {
         // Retirer le bus du site courant
         if (this.current_site instanceof SiteDepart) {
@@ -117,6 +178,11 @@ public class Bus extends Thread {
         }
     }
 
+    /**
+     * Methode ToString
+     * Affiche l'ID du bus et les festivaliers à bord
+     * @return string
+     */
     public String toString() {
         String rslt = "Bus "+idB+"\n";
         for(Festivalier f : this.festivaliers) {
@@ -126,6 +192,10 @@ public class Bus extends Thread {
         return rslt;
     }
 
+    /**
+     * Methode run
+     * Lance le bus (thread) et execute en boucle la simulation arriver - attendre -partir
+     */
     public void run() {
 
         System.out.println("On lance un thread Bus !");

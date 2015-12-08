@@ -1,5 +1,14 @@
 package festival.classes;
-
+/**
+ * <b>Classe Billeterie</b>
+ * <p>
+ * La billeterie dispose d'un nombre de billet max, d'un nombre de billet dispo, d'une fonction pour
+ * attribuer un billet à un festivalier
+ *
+ * </p>
+ *
+ * @version 1.0
+ */
 public class Billeterie {
 
     // CONSTANTE - Nombre de tickets max
@@ -8,15 +17,30 @@ public class Billeterie {
     // VARIABLE - Nombre de billets dispo
     private int nbBilletDispo;
 
-    // Constructeur
+    /**
+     * Constructeur de la billeterie
+     *
+     *  Billeterie : Nombre de billet dispo = Nombre de billet maximum
+     */
     public Billeterie() {
         this.nbBilletDispo = nbBilletMax;
     }
 
-    // Getters et setters
+    /**
+     * Getter NbBilletDispo
+     * @return int
+     *      retourne le nombre de billet dispo
+     */
     public int getNbBilletDispo() { return nbBilletDispo; }
 
-    // Acheter un billet
+    /**
+     * Méthode AcheterBillet
+     * Si l'état du festivalier est A et si il reste assez de billet dispo, alors
+     * on décrémente le nombre de billet dispo
+     * Met l'état du festivalier à B
+     * @param f
+     *
+     */
     public boolean acheterBillet(Festivalier f) {
         synchronized (this) {
             // Si il reste des billets et si le festivalier n'a pas encore acheté de billet
