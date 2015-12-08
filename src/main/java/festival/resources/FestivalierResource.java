@@ -19,11 +19,12 @@ import org.restlet.resource.ServerResource;
 import java.util.Iterator;
 
 /**
- * Resource exposing a user
+ * <b>Classe BusesResource</b>
+ * <p>
+ *     Classe permettant de faire le lien entre l'ajout d'un festivalier et l'interface web
+ * </p>
  *
- * @author msimonin
- * @author ctedeschi
- *
+ * @version 1.0
  */
 public class FestivalierResource extends ServerResource
 {
@@ -44,13 +45,24 @@ public class FestivalierResource extends ServerResource
                 .get("simulation");
     }
 
+    /**
+     * Méthode addFestivalierHtml
+     * Affiche la template d'affichage du formulaire d'ajout de festivaliers
+     * @return Representation
+     *      Fichier HTML
+     */
     @Get("html")
     public Representation addFestivalierHtml() {
         return new FileRepresentation("templates/add-festivalier.html", MediaType.TEXT_HTML);
     }
 
-
-
+    /**
+     * Méthode createFest
+     * Récupère un JSON pour connaître le nombre de festivalier à ajouter
+     * Puis fait appel à la fonction d'ajout de la simulation
+     * @param representation
+     * @throws Exception
+     */
     @Post("json")
     public void createFest(JsonRepresentation representation) throws Exception
     {

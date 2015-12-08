@@ -12,7 +12,12 @@ import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 
 /**
- * Created by Quentin on 07/12/2015.
+ * <b>Classe FestInfoResource</b>
+ * <p>
+ *     Classe permettant de récupérer un festivalier et de l'afficher dans un rendu html via JSON
+ * </p>
+ *
+ * @version 1.0
  */
 public class FestInfoResource extends ServerResource {
 
@@ -46,11 +51,9 @@ public class FestInfoResource extends ServerResource {
     @Get("json")
     public Representation getFestivalier() throws Exception
     {
-        System.out.println("Choux fleur");
         String festIdString = (String) getRequest().getAttributes().get("peopleId");
         int festID = Integer.valueOf(festIdString);
         fest_ = simulation_.getFestivaliers().get(festID);
-        System.out.println("Crotte");
         JSONObject festObject = new JSONObject();
         festObject.put("id", fest_.getIdF());
         festObject.put("nom", fest_.getNomF());

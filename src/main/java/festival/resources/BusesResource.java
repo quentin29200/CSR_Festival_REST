@@ -20,7 +20,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created by 13006798 on 18/11/15.
+ * <b>Classe BusesResource</b>
+ * <p>
+ *     Classe permettant de faire le lien entre l'ajout d'un bus et l'interface web
+ * </p>
+ *
+ * @version 1.0
  */
 public class BusesResource extends ServerResource {
 
@@ -51,7 +56,7 @@ public class BusesResource extends ServerResource {
         return new FileRepresentation("templates/add-buses.html", MediaType.TEXT_HTML);
     }
 
-    
+
     /**
      * Méthode CreateBuses
      * Récupère un JSON pour connaître le nombre de bus à ajouter
