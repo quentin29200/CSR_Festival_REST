@@ -17,7 +17,7 @@ import java.util.Collection;
 /**
  * <b>Classe FestivaliersResource</b>
  * <p>
- *     Classe permettant de récupérer la liste des festivaliers et de l'afficher dans un rendu html via JSON
+ *     Classe permettant de rÃ©cupÃ©rer la liste des festivaliers et de l'afficher dans un rendu html via JSON
  * </p>
  *
  * @version 1.0

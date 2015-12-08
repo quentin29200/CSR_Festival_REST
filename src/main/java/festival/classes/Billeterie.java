@@ -3,7 +3,7 @@ package festival.classes;
  * <b>Classe Billeterie</b>
  * <p>
  * La billeterie dispose d'un nombre de billet max, d'un nombre de billet dispo, d'une fonction pour
- * attribuer un billet Ã  un festivalier
+ * attribuer un billet à un festivalier
  *
  * </p>
  *
@@ -34,16 +34,16 @@ public class Billeterie {
     public int getNbBilletDispo() { return nbBilletDispo; }
 
     /**
-     * MÃ©thode AcheterBillet
-     * Si l'Ã©tat du festivalier est A et si il reste assez de billet dispo, alors
-     * on dÃ©crÃ©mente le nombre de billet dispo
-     * Met l'Ã©tat du festivalier Ã  B
+     * Méthode AcheterBillet
+     * Si l'état du festivalier est A et si il reste assez de billet dispo, alors
+     * on décrémente le nombre de billet dispo
+     * Met l'état du festivalier à B
      * @param f
      *
      */
     public boolean acheterBillet(Festivalier f) {
         synchronized (this) {
-            // Si il reste des billets et si le festivalier n'a pas encore achetÃ© de billet
+            // Si il reste des billets et si le festivalier n'a pas encore acheté de billet
             if (this.nbBilletDispo > 0 && f.getEtatF().equals("A")) {
 
                 // Decrementer le nombre de billets dispo
@@ -53,7 +53,7 @@ public class Billeterie {
                 // Attribution d'un billet a un festivalier = Changer etat festivalier
                 f.setEtatF("B");
 
-                // Le festivalier a bien achetÃ© son billet
+                // Le festivalier a bien acheté son billet
                 return true;
             }
             return false;
