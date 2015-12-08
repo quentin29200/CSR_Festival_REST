@@ -52,12 +52,10 @@ public class FestivalierResource extends ServerResource
 
 
     @Post("json")
-    public boolean createFest(JsonRepresentation representation) throws Exception
+    public void createFest(JsonRepresentation representation) throws Exception
     {
         JSONObject object = representation.getJsonObject();
         simulation_.addPeoples(object.getInt("length"));
-        return true;
-
     }
 
 }

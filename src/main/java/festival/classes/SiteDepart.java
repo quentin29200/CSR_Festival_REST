@@ -24,7 +24,6 @@ public class SiteDepart extends Site {
      *  Festivalier - Le festivalier qui monte dans le bus
      */
     public synchronized void monterDansBus(Festivalier f) {
-        System.out.println(this.buses.toString());
         // Seul les festivaliers aillant un billet peuvent monter
         if (f.getEtatF().equals("B")) {
             // Tant que le festivalier n'est pas dans un bus
