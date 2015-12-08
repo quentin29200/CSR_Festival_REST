@@ -55,14 +55,31 @@ $(document).ready(function() {
              },
         });
     })
+    if ( $( "#detail_user_fields" ).length ) {
+         var url = $(location).attr('href');
+         var res = url.split("/");
+         var id = res[4];
+         $.ajax({
+            type: "get",
+            url: "/people/" + id,
+            dataType: "json",
+            contentType : "application/json",
+            success: function(data){
+                console.log(data);
+                $("#detail_user_id").append(data.id);
+                $("#detail_user_nomF").append(data.nom);
+                $("#detail_user_prenomF").append(data.prenom);
+                $("#detail_user_etatF").append(data.etat);
+
+            }
+        });
+    }
 
     /**
      * Liste les festivaliers
      */
-    $('#list-festivaliers-tab').ready( function() {
-
+    if ( $( "#list_festivaliers_tab" ).length ) {
         var users_table = $('#users-table tbody');
-
         $.ajax({
             type: "get",
             url: "/people/",
@@ -71,6 +88,7 @@ $(document).ready(function() {
             success: function(data){
 
                 $.each(data, function (item) {
+                    console.log("TEST");
                     var id = data[item].id;
                     var etatF = data[item].etatF;
                     var url = data[item].url;
@@ -82,21 +100,10 @@ $(document).ready(function() {
                     '</tr>'
                     );
 
-                    $('a#detail_user_' + id).click(function() {
-                        console.log("TA MERE LA PUTE");
-                        $.ajax({
-                            type: "get",
-                            url: "/people/" + id,
-                            dataType: "json",
-                            contentType : "application/json",
-                            success: function(data){
-                                $("#detail_user_id").append(data.id);
-                                $("#detail_user_nomF").append(data.nom);
-                                $("#detail_user_prenomF").append(data.prenom);
-                                $("#detail_user_etatF").append(data.etat);
-                            }
-                        });
-                    });
+                    /*$('#detail_user_' + id).click(function() {
+
+
+                    });*/
 
                 });
             },
@@ -106,6 +113,6 @@ $(document).ready(function() {
                 console.log(textStatus);
             }
         });
-    })
+    }
 
 });

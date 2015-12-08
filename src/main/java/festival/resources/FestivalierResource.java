@@ -45,44 +45,17 @@ public class FestivalierResource extends ServerResource
     }
 
     @Get("html")
-    public Representation getFestivalierHtml() {
+    public Representation addFestivalierHtml() {
         return new FileRepresentation("templates/add-festivalier.html", MediaType.TEXT_HTML);
     }
 
-    /**
-     * Returns the user matching the id given in the URI
-     * 
-     * @return JSON representation of a festivalier
-     * @throws JSONException
-     */
-    @Get("json")
-    public Representation getFestivalier() throws Exception
-    {
-        System.out.println("Choux fleur");
-        String festIdString = (String) getRequest().getAttributes().get("peopleId");
-        int festID = Integer.valueOf(festIdString);
-        fest_ = simulation_.getFestivaliers().get(festID);
-        System.out.println("Crotte");
-        JSONObject festObject = new JSONObject();
-        festObject.put("id", fest_.getIdF());
-        festObject.put("nom", fest_.getNomF());
-        festObject.put("prenom", fest_.getPrenomF());
-        festObject.put("etat", fest_.getEtatF());
 
-        JsonRepresentation result = new JsonRepresentation(festObject);
-
-        System.out.println("festObject content : " + festObject);
-        System.out.println("result content : " + result);
-
-        result.setIndenting(true);
-        return result;
-    }
 
     @Post("json")
     public void createFest(JsonRepresentation representation) throws Exception
     {
         JSONObject object = representation.getJsonObject();
-        simulation_.addPeople(object.getInt("length"));
+        simulation_.addPeoples(object.getInt("length"));
     }
 
 }

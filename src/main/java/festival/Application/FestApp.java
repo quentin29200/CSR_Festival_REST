@@ -1,8 +1,5 @@
 package festival.Application;
-import festival.resources.BusesResource;
-import festival.resources.FestivalierResource;
-import festival.resources.FestivaliersResource;
-import festival.resources.RootResource;
+import festival.resources.*;
 import org.restlet.Application;
 import org.restlet.Context;
 import org.restlet.Restlet;
@@ -32,7 +29,7 @@ public class FestApp extends Application{
         router.attach("/people", FestivalierResource.class);
         router.attach("/people/", FestivaliersResource.class);
         router.attach("/buses", BusesResource.class);
-        router.attach("/people/{peopleId}", FestivalierResource.class);
+        router.attach("/people/{peopleId}", FestInfoResource.class);
         return router;
     }
 }

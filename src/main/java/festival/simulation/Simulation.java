@@ -24,18 +24,9 @@ public class Simulation {
 
 	public void addPeoples(int people) {
         for (int i = 0; i <people; i++) {
-            Festivalier f = new Festivalier("Festi"+i,"Festi"+i, this);
+            Festivalier f = new Festivalier("Festi","Festi", this);
             festivaliers.add(f);
-            System.out.println("Festi"+i);
-            f.start();
-        }
-    }
-
-    public void addPeople(int people) {
-        for (int i = 0; i <people; i++) {
-            Festivalier f = new Festivalier("Festi"+i,"Festi"+i, this);
-            festivaliers.add(f);
-            System.out.println("Festi"+i);
+            System.out.println("Festi"+f.getIdF()+"ajouté à la liste en position"+festivaliers.size());
             f.start();
         }
     }
@@ -43,7 +34,7 @@ public class Simulation {
 	public void addBuses(int buses, int seats) {
         for (int i = 0; i <buses; i++) {
             System.out.println("Bus "+i+" créé");
-            Bus b = new Bus(i, seats);
+            Bus b = new Bus(seats);
             b.initialiserTrajet(this.depart, this.sitefestival);
             this.buses_depart.add(b);
             b.start();

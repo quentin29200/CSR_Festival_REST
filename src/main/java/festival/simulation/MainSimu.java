@@ -8,7 +8,7 @@ public class MainSimu {
 		// Ajout de 5 bus de capacité 40 places
 		simulation.addBuses(2,9);
 
-		simulation.addPeople(20);
+		simulation.addPeoples(20);
 
 	}
 

@@ -40,7 +40,7 @@ public class FestivaliersResource extends ServerResource {
     {
         Collection<Festivalier> festivaliers = simulation_.getFestivaliers();
         Collection<JSONObject> jsonUsers = new ArrayList<JSONObject>();
-
+            System.out.println("ICI GET FESTIVALIER");
         for (Festivalier festivalier : festivaliers)
         {
             JSONObject current = new JSONObject();

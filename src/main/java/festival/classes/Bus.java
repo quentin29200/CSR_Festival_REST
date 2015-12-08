@@ -9,6 +9,7 @@ import java.util.List;
 public class Bus extends Thread {
 
     // VARIABLE - Identifiant du bus
+    private static int nbbus = 0;
     private int idB = 0;
 
     // VARIABLE - Capacité du bus
@@ -23,10 +24,19 @@ public class Bus extends Thread {
     private Site arrivee;
 
     // Constructeur
-    public Bus(int idB, int capa) {
-        this.idB = idB;
+    public Bus(int capa) {
+        this.idB = nextID();
         this.capa = capa;
         this.festivaliers = new ArrayList<>();
+    }
+
+    private static synchronized int nextID()
+    {
+        return nbbus++;
+    }
+
+    public int getIdB() {
+        return idB;
     }
 
     public boolean estComplet() {
@@ -61,7 +71,7 @@ public class Bus extends Thread {
             this.festivaliers.clear();
         }
         if (site instanceof SiteDepart) {
-            ((SiteDepart)site).ajouterBus(this);
+            site.ajoutBus(this);
             System.out.println("Bus "+this.idB+" arrive sur "+this.current_site.toString());
             System.out.println("Bus "+this.idB+" embarquement des passagers...");
         }
