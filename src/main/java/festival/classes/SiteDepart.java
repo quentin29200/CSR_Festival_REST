@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by 13006798 on 27/11/15.
  */
-public class SiteDepart implements Site {
+public class SiteDepart extends Site {
     // VARIABLE - Ensemble des bus présent sur le site courant
     private ArrayList<Bus> buses;
 
@@ -56,21 +56,13 @@ public class SiteDepart implements Site {
         return tempsAttente;
     }
 
-    public void ajoutBus(Bus bus) {
-        synchronized (this) {
-            this.buses.add(bus.getIdB(), bus);
-            this.notifyAll();
-        }
+    synchronized public void ajoutBus(Bus bus) {
+        this.buses.add(bus);
+        this.notifyAll();
     }
 
-    public synchronized void retraitBus(Bus bus) {
-        synchronized (this) {
-            Bus b = this.buses.remove(2);
-            System.out.println(b.getIdB());
-            System.out.println("Bus" + bus.getIdB() + " removed of list");
-            System.out.println(this.buses.toString());
-        }
-
+    synchronized public void retraitBus(Bus bus) {
+        this.buses.remove(bus);
     }
 
     public ArrayList<Bus> getBuses() {

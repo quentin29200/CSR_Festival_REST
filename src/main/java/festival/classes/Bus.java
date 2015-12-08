@@ -60,7 +60,7 @@ public class Bus extends Thread {
         this.current_site = site;
         // Si il s'agit de l'aire de concert
         if (site instanceof AireDeConcert) {
-            site.ajoutBus(this);
+            //site.ajoutBus(this);
             System.out.println("Bus "+this.idB+" arrive sur "+this.current_site.toString());
             System.out.println("Bus "+this.idB+" débarquement des passagers...");
             // On fait descendre tout le monde du bus (passage du festivalier à l'état D et on vide la liste des festivaliers du bus
@@ -71,7 +71,7 @@ public class Bus extends Thread {
             this.festivaliers.clear();
         }
         if (site instanceof SiteDepart) {
-            site.ajoutBus(this);
+            ((SiteDepart)site).ajoutBus(this);
             System.out.println("Bus "+this.idB+" arrive sur "+this.current_site.toString());
             System.out.println("Bus "+this.idB+" embarquement des passagers...");
         }
@@ -104,7 +104,9 @@ public class Bus extends Thread {
     // Le bus part du site courant
     private void partir() {
         // Retirer le bus du site courant
-        this.current_site.retraitBus(this);
+        if (this.current_site instanceof SiteDepart) {
+            ((SiteDepart)this.current_site).retraitBus(this);
+        }
         System.out.println("Bus "+this.idB+" départ de "+this.current_site.toString());
 
         // Trajet

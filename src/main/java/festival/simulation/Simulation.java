@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Simulation {
     private ArrayList<Bus> buses_depart = new ArrayList<>();
-    private ArrayList<Bus> buses_arrivee = new ArrayList<>();
     private ArrayList<Festivalier> festivaliers = new ArrayList<>();
     private SiteDepart depart;
     private Billeterie billeterie;
@@ -18,7 +17,7 @@ public class Simulation {
 
         this.billeterie = new Billeterie();
 
-        this.sitefestival = new AireDeConcert(buses_arrivee, 1000);
+        this.sitefestival = new AireDeConcert(1000);
         System.out.println("Aire du concert créé");
     }
 
@@ -33,10 +32,9 @@ public class Simulation {
 
 	public void addBuses(int buses, int seats) {
         for (int i = 0; i <buses; i++) {
-            System.out.println("Bus "+i+" créé");
             Bus b = new Bus(seats);
+            System.out.println("Bus "+b.getIdB()+" créé");
             b.initialiserTrajet(this.depart, this.sitefestival);
-            this.buses_depart.add(b);
             b.start();
         }
     }
